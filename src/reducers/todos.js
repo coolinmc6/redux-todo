@@ -7,12 +7,12 @@ const todo = (state = {}, action) => {
         completed: false
       }
     case 'TOGGLE_TODO':
-      console.log('todo (single object) TOGGLE_TODO')
+      
       if (state.id !== action.id) {
-        
+        console.log('todo (single object): TOGGLE_TODO - state.id !== action.id')  
         return state
       }
-      // console.log(state, action)
+      console.log('todo (single object): TOGGLE_TODO')  
       return Object.assign({}, state, {
         completed: !state.completed
       })

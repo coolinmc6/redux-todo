@@ -21,7 +21,23 @@ for todos and visibilityFilter
   no state yet?) and the other is the action.
   - In the todo function, a switch identifies the `ADD_TODO` case and returns an object with three
   properties: id, text and completed which was not passed in but I guess it could've been
-  - the `TOGGLE_TODO` case is pretty interesting as well.  When that action comes in [continue here]
+  - the `TOGGLE_TODO` case is pretty interesting as well.  When that action comes in, it maps through
+  all the todos and calls the `todo` function on each one; passing in a todo object and the action.  
+  It is in the `todo` function that if the todo.id == action.id then you toggle the completed property.
+  This layout has each todo go through the reducer which sounds like it would not scale well
+- The VisibleTodoList is the container is confusing and I am still struggling to figure it all out.  I 
+am assuming that this is "clean code" but it's not easy to follow, at least how I've learned React and
+Redux thus far:
+  - First, the connect function is connecting the normal mapStateToProps and mapDispatchToProps but then
+  connecting TodoList.  That whole connected group: mapStateToProps-mapDispatchToProps-TodoList is the
+  component VisibleTodoList...and THAT is what is exported (and then inserted into App)
+  - mapStateToProps is mapping the todos property of state to the result of the getVisibleTodos function.
+  As that function shows, depending on what what the user has clicked (all, active or complete) is what
+  the list of todos will be. 
+  - mapDispatchToProps is a little bit more complicated because I haven't done any Redux without the
+  React-Redux library.
+
 
   - CM -> the onTodoClick is mapped to props (and thus connected to action creators) in the VisibleTodoList
   container.  That's where the magic happens...I need to re-visit
+
